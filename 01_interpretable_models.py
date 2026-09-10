@@ -46,3 +46,19 @@ print(f"Accuracy {accuracy_score(y_test, y_pred)}")
 # %% Explain local prediction
 tree_local = tree.explain_local(X_test[:100], y_test[:100], name='Tree')
 show(tree_local)
+# %% Fit Explainable Boosting Machine
+ebm = ExplainableBoostingClassifier(random_state=2021)
+ebm.fit(X_train, y_train)
+print("Training finished.")
+y_pred = ebm.predict(X_test)
+print(f"F1 Score {f1_score(y_test, y_pred, average='macro')}")
+print(f"Accuracy {accuracy_score(y_test, y_pred)}")
+
+# %% Explain locally
+ebm_local = ebm.explain_local(X_test[:100], y_test[:100], name='EBM')
+show(ebm_local)
+
+# %% Explain globally
+ebm_global = ebm.explain_global(name='EBM')
+show(ebm_global)
+# %%

@@ -16,10 +16,20 @@ data.info()
 
 # %% Show histogram for all columns
 columns = data.columns
+
 for col in columns:
-    print("col: ", col)
+    print("Column:", col)
+
+    plt.figure(figsize=(8, 5))
+
     data[col].hist()
+
+    plt.title(f"Distribution of {col}")
+    plt.xlabel(col)
+    plt.ylabel("Frequency")
+
     plt.show()
+    plt.close()
 
 # %% Show preprocessed dataframe
 data_loader.preprocess_data()

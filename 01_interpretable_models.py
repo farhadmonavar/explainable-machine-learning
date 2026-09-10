@@ -35,3 +35,14 @@ show(lr_local)
 # %% Explain global logistic regression model
 lr_global = lr.explain_global(name='Logistic Regression')
 show(lr_global)
+# %% Fit decision tree model
+tree = ClassificationTree()
+tree.fit(X_train, y_train)
+print("Training finished.")
+y_pred = tree.predict(X_test)
+print(f"F1 Score {f1_score(y_test, y_pred, average='macro')}")
+print(f"Accuracy {accuracy_score(y_test, y_pred)}")
+
+# %% Explain local prediction
+tree_local = tree.explain_local(X_test[:100], y_test[:100], name='Tree')
+show(tree_local)
